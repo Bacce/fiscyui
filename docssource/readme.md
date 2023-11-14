@@ -8,8 +8,3 @@ Documentation is generated from the docssource directory, to the /docs for githu
 - delete docs/index.html file
 - $ cd docssource
 - $ yarn build
-
-# Development
-For local development, remove this line from vite.config.js
-
-base: '/fiscyui',
