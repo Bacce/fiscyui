@@ -1,0 +1,5 @@
+.container {
+    padding: 30px;
+    border-bottom: 5px solid var(--color-light-green);
+    background-color: var(--color-dark-green);
+}

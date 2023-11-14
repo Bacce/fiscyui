@@ -1,25 +1,163 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import { Button } from 'fissy-ui';
+import { Button, PageContainer, HeaderContainer, HeaderTitle, HeaderSubtitle, Footer, Navigation } from 'fissy-ui';
 
 const WelcomePage = () => {
   return (<div style={{textAlign:"center"}}>
-    <h1>Welcome to the <b>Fischy UI</b> documentation</h1>
+    <h1>Welcome to the <b>Fiscy UI</b> documentation</h1>
     <p>You can find all the available component on the sidebar, and we also have some example pages built for you.</p>
   </div>)
 }
 
+const ColorPage = () => {
+  const colors = [
+      {name: "background", hex: "#bdc7c3"},
+      {name: "darkBlue", hex: "#233b45"},
+      {name: "mediumBlue", hex: "#607376"},
+      {name: "lightBlue", hex: "#9daba9"},
+      {name: "lightGreen", hex: "#cad2cc"},
+      {name: "mediumGreen", hex: "#adbeb4"},
+      {name: "darkGreen", hex: "#a4b3a6"},
+      {name: "darkestGreen", hex: "#8a9894"},
+  ]
+
+  return (<>
+    <h1>Color palette</h1>
+
+    {colors.map((color)=>(
+      <div style={{width: "100px", height: "100px", background: color.hex, border: "1px solid", margin: 10, display: "inline-block"}}>
+        <span style={{marginTop: "100%"}}>{color.name}</span>
+      </div>
+    ))}
+  </>)
+}
+
 const ExamplePage01 = () => {
-  return (<div style={{border: "1px solid",}}>
-    <h1>Example page component example</h1>
-  </div>)
+  return (<PageContainer gradient>
+    <HeaderContainer>
+      <HeaderTitle label="Argos extractors"/>
+      <HeaderSubtitle label="record locator"/>
+      <Navigation />
+    </HeaderContainer>
+    <div style={{height: 380,}}></div>
+    <Footer>
+      Employee number:
+    </Footer>
+    </PageContainer>)
 }
 
 const App = () => {
-  const welcomePage = {component: WelcomePage}
-  const [active, setActive] = useState(welcomePage);
+  const [active, setActive] = useState({component: WelcomePage});
 
   const docs = [
+    {
+      type: "page",
+      title: "Welcome",
+      name: "welcomepage",
+      component: WelcomePage
+    },
+    {
+      type: "page",
+      title: "Colors",
+      name: "colorspage",
+      component: ColorPage
+    },
+    {
+      type: "comp",
+      title: "PageContainer",
+      name: "pagecont",
+      description: "Page Container act as a theme provider, as it inject the color palette for the rest of the components, also introduce a toggleable overlay to give some gradient to the otherwise solid color elements.",
+      component: PageContainer,
+      exampleCode: "<PageContainer><div>content</div></PageContainer>",
+      exampleProps: {
+        children: "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum",
+        gradient: true,
+      },
+      props: [
+        {
+          name: "children",
+          type: "string",
+          desc: "children dom elements"
+        },
+        {
+          name: "gradient",
+          type: "boolean",
+          desc: "can turn off the ovelay (default: true)"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "HeaderContainer",
+      name: "header",
+      description: "Header container provide the basic layout for the header, require HeaderTitle, HeaderSubtitle and/or Navigation components for full purpose",
+      component: HeaderContainer,
+      exampleCode: "<HeaderContainer><HeaderTitle></HeaderTitle></HeaderContainer>",
+      exampleProps: {
+        children: "empty"
+      },
+      props: [
+        {
+          name: "children",
+          type: "string",
+          desc: "children dom elements"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "HeaderTitle",
+      name: "headertitle",
+      description: "Header main title component",
+      component: HeaderTitle,
+      exampleCode: "<HeaderContainer><HeaderTitle label='title'/></HeaderContainer>",
+      exampleProps: {
+        label: "page title"
+      },
+      props: [
+        {
+          name: "label",
+          type: "string",
+          desc: "title of the page"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "HeaderSubtitle",
+      name: "headersubtitle",
+      description: "Header subtitle component",
+      component: HeaderSubtitle,
+      exampleCode: "<HeaderContainer><HeaderSubtitle label='subtitle'/></HeaderContainer>",
+      exampleProps: {
+        label: "page subtitle"
+      },
+      props: [
+        {
+          name: "label",
+          type: "string",
+          desc: "title of the page"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "Footer",
+      name: "footer",
+      description: "Page footer, accepts any dom elements, but designed for only typography",
+      component: Footer,
+      exampleCode: "<Footer>children dom elemenets</Footer>",
+      exampleProps: {
+        children: "empty"
+      },
+      props: [
+        {
+          name: "children",
+          type: "string",
+          desc: "children dom elements"
+        }
+      ]
+    },
     {
       type: "comp",
       title: "Button1",
@@ -44,14 +182,6 @@ const App = () => {
         }
       ]
     },
-    {
-      type: "comp",
-      title: "Button2",
-      name: "button2",
-      description: "Button for some glorious purpose",
-      component: Button,
-    },
-
     {
       type: "example",
       title: "Example page",
@@ -78,20 +208,23 @@ const App = () => {
           {/* LEFT SIDEBAR */}
           <div className="row" style={{minHeight: "calc(100vh - 50px)",}}>
             <div className="col" style={{flexBasis: 150, flexGrow: 0, overflow:"hidden", borderRight: "2px solid #718093", }}>
+
+              {/* INFO */}
+              {docs.filter((item)=>item.type === "page").map((item, id)=>(<button key={`page${id}`} type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
               {/* COMPONENTS */}
               <h5 style={{marginTop: 10}}>Components</h5>
-              {docs.filter((item)=>item.type === "comp").map((item)=>(<button type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
+              {docs.filter((item)=>item.type === "comp").map((item, id)=>(<button key={`component${id}`} type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
               
               {/* EXAMPLES */}
               <h5>Examples</h5>
-              {docs.filter((item)=>item.type === "example").map((item)=>(<button type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
+              {docs.filter((item)=>item.type === "example").map((item, id)=>(<button key={`example${id}`} type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
             </div>
 
 
             {/* PREVIEW */}
             <div className="col">
               {active && (<>
-                <h1>{active.title}</h1>
+                {active.type !== "page" && <h1>{active.title}</h1>}
                 <p>{active.description}</p>
                 <pre>{active.exampleCode}</pre>
                 
@@ -108,8 +241,17 @@ const App = () => {
                     if (pr.type==="string"){
                       return (
                       <>
-                        <span style={{display: "block", fontSize: 12}}>{pr.name}</span>
+                        <span style={{display: "block", fontSize: 12, marginTop: 4}}>{pr.name}</span>
                         <input className="form-control" onChange={(e)=>{setActive({...active, exampleProps: {...active.exampleProps, [pr.name]: e.target.value}})}} defaultValue={active.exampleProps[pr.name]}/>
+                      </>)
+                    }
+                    if (pr.type==="boolean"){
+                      return (
+                      <>
+                        <span style={{display: "block", fontSize: 12, marginTop: 4}}>{pr.name}</span>
+                        <p>{JSON.stringify(pr.exampleProps)}</p>
+                        <input type="checkbox" onChange={(e)=>{setActive({...active, exampleProps: {...active.exampleProps, [pr.name]: e.target.checked}})}} checked={active.exampleProps[pr.name]}/>
+                        {/* <input className="form-control" onChange={(e)=>{setActive({...active, exampleProps: {...active.exampleProps, [pr.name]: e.target.value}})}} defaultValue={active.exampleProps[pr.name]}/> */}
                       </>)
                     }
                     else{

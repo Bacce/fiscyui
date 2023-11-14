@@ -1,0 +1,12 @@
+.container {
+    display: inline-block;
+    border-left: 17px solid var(--color-dark-blue);
+    border-right: 80px solid var(--color-medium-green);
+    background-color: var(--color-light-green);
+    color: var(--color-dark-blue);
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 3px 100px 3px 12px;
+    margin-bottom: 10px;
+    min-width: 390px;
+}

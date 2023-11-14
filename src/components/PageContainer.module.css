@@ -1,0 +1,28 @@
+:root {
+    --color-background: #bdc7c3;
+
+    --color-light-green: #cad2cc;
+    --color-medium-green: #adbeb4;
+    --color-dark-green: #a4b3a6;
+    --color-darker-green: #8a9894;
+
+    --color-light-blue: #9daba9;
+    --color-medium-blue: #607376;
+    --color-dark-blue: #233b45;
+}
+
+.container {
+    background-color: var(--color-background);
+    position: relative;
+}
+
+.container.gradient:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    box-shadow: inset 0px 0px 60px -30px var(--color-dark-blue);
+}

@@ -1,0 +1,6 @@
+.container {
+    border-top: 3px solid var(--color-dark-blue);
+    border-bottom: 30px solid var(--color-dark-blue);
+    background-color: var(--color-darker-green);
+    padding: 35px 50px;
+}

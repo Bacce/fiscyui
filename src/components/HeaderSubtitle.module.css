@@ -1,0 +1,41 @@
+.container {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.container::before {
+    content: "";
+    height: 2px;
+    position: absolute;
+    background-color: var(--color-dark-blue);
+    display: block;
+    position: absolute;
+    width: 100%;
+}
+
+.container::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    margin-bottom: -1px;
+    height: 40px;
+    width: 50px;
+    background: var(--color-dark-blue);
+    bottom: 100%;
+    transform: skewX(-20deg);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.labelContainer {
+    min-width: 390px;
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: var(--color-light-green);
+    background-color: var(--color-dark-blue);
+    border-left: 30px solid var(--color-dark-blue);
+    text-transform: uppercase;
+    padding: 2px 0;
+    letter-spacing: 1px;
+}
