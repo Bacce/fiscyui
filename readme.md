@@ -1,9 +1,8 @@
 # Introduction
 
-Fissy-UI is a React UI component library, taking inspiration from some of the Starfield UI's.
-The main purpose is for me to learn how I can create a light weight NPM package, and have some fun building UI components, what can be useful for others at some point as well.
+Fiscy-UI is a futuristic React UI component library, taking inspiration from some of the great Starfield UI's. The name comes from playing on scifi, "Fictional Sciency"
+The main purpose is to teach myself how I to create an NPM package, experiment with it, and have some fun building UI components.
 
 # Usage
 
-See component library documentation
-
+See component library documentation at https://bacce.github.io/fiscyui/
