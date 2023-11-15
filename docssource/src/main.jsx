@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import { Button, PageContainer, HeaderContainer, HeaderTitle, HeaderSubtitle, Footer, Navigation } from 'fissy-ui';
+import { Button, PageContainer, HeaderContainer, HeaderTitle, HeaderSubtitle, Footer, Navigation, NavigationButton, Typography, typoTypeEnum } from 'fissy-ui';
 
 const WelcomePage = () => {
   return (<div style={{textAlign:"center"}}>
@@ -33,15 +33,29 @@ const ColorPage = () => {
 }
 
 const ExamplePage01 = () => {
+  const [activeNav, setActiveNav] = useState(0);
+  
+  const handleOnClick = (id) => {
+    setActiveNav(id);
+  }
+
+  const navConfig = [
+    { title: "Biometric id", onClick: handleOnClick },
+    { title: "body", onClick: handleOnClick },
+    { title: "face", onClick: handleOnClick },
+    { title: "background", onClick: handleOnClick }
+  ]
+
   return (<PageContainer gradient>
     <HeaderContainer>
       <HeaderTitle label="Argos extractors"/>
       <HeaderSubtitle label="record locator"/>
-      <Navigation />
+      <Navigation config={navConfig} active={activeNav}/>
     </HeaderContainer>
     <div style={{height: 380,}}></div>
     <Footer>
-      Employee number:
+      <Typography type={typoTypeEnum.title}>Employee number:&nbsp;</Typography>
+      <Typography>12321-12341234-12341234</Typography>
     </Footer>
     </PageContainer>)
 }
@@ -142,6 +156,60 @@ const App = () => {
     },
     {
       type: "comp",
+      title: "Navigation",
+      name: "navigation",
+      description: "Navigation component consist of a container element and a list of NavigationButton components created from the config object. The configuration should be an array of object, each object should contain a title field with a string, and an onClick function. The onClick will return a number. The other prop of navigation is the active prop, what takes a number, and it makes the button with the number active.",
+      component: Navigation,
+      exampleCode: "<Navigation config={[{title:'title', onClick:(id)=>{}}]} active={1}/>",
+      exampleProps: {
+        config: [{title: "button1", onClick:(id)=>{alert(id)}}, {title: "button2", onClick:(id)=>{alert(id)}}, {title: "button3", onClick:(id)=>{alert(id)}}],
+        active: 0
+      },
+      props: [
+        {
+          name: "config",
+          type: "object",
+          desc: "configuration object for navigation"
+        },
+        {
+          name: "active",
+          type: "number",
+          desc: "active button number"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "NavigationButton",
+      name: "navigationbutton",
+      description: "Navigation button",
+      component: NavigationButton,
+      exampleCode: "<NavigationButton label='buttonLabel' onClick={()=>{}}/>",
+      exampleProps: {
+        label: "buttonLabel",
+        isActive: false,
+        onClick: ()=>{alert("click")}
+      },
+      props: [
+        {
+          name: "label",
+          type: "string",
+          desc: "Button label"
+        },
+        {
+          name: "isActive",
+          type: "boolean",
+          desc: "Button status"
+        },
+        {
+          name: "onClick",
+          type: "function",
+          desc: "click handler"
+        }
+      ]
+    },
+    {
+      type: "comp",
       title: "Footer",
       name: "footer",
       description: "Page footer, accepts any dom elements, but designed for only typography",
@@ -155,6 +223,24 @@ const App = () => {
           name: "children",
           type: "string",
           desc: "children dom elements"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "Typography",
+      name: "typo",
+      description: "Typography element, to standardize usage of text content",
+      component: Typography,
+      exampleCode: "<Typography type={typoTypeEnum.default}>content</Typography>",
+      exampleProps: {
+        children: "content"
+      },
+      props: [
+        {
+          name: "children",
+          type: "string",
+          desc: "content of the typography"
         }
       ]
     },
@@ -245,13 +331,19 @@ const App = () => {
                         <input className="form-control" onChange={(e)=>{setActive({...active, exampleProps: {...active.exampleProps, [pr.name]: e.target.value}})}} defaultValue={active.exampleProps[pr.name]}/>
                       </>)
                     }
-                    if (pr.type==="boolean"){
+                    else if (pr.type==="number"){
                       return (
                       <>
                         <span style={{display: "block", fontSize: 12, marginTop: 4}}>{pr.name}</span>
-                        <p>{JSON.stringify(pr.exampleProps)}</p>
+                        <input type="number" className="form-control" onChange={(e)=>{setActive({...active, exampleProps: {...active.exampleProps, [pr.name]: Number(e.target.value)}})}} defaultValue={active.exampleProps[pr.name]}/>
+                      </>)
+                    }
+                    else if (pr.type==="boolean"){
+                      return (
+                      <>
+                        <span style={{display: "block", fontSize: 12, marginTop: 4}}>{pr.name}</span>
+                        {/* <p>{JSON.stringify(pr.exampleProps)}</p> */}
                         <input type="checkbox" onChange={(e)=>{setActive({...active, exampleProps: {...active.exampleProps, [pr.name]: e.target.checked}})}} checked={active.exampleProps[pr.name]}/>
-                        {/* <input className="form-control" onChange={(e)=>{setActive({...active, exampleProps: {...active.exampleProps, [pr.name]: e.target.value}})}} defaultValue={active.exampleProps[pr.name]}/> */}
                       </>)
                     }
                     else{

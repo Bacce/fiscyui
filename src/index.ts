@@ -5,3 +5,5 @@ export { default as HeaderTitle } from "./components/HeaderTitle";
 export { default as HeaderSubtitle } from "./components/HeaderSubtitle";
 export { default as Footer } from "./components/Footer";
 export { default as Navigation } from "./components/Navigation";
+export { default as NavigationButton } from "./components/NavigationButton";
+export { default as Typography, typoTypeEnum} from "./components/Typography";

@@ -1,0 +1,18 @@
+span {
+    color: var(--color-dark-blue);
+}
+
+.default {
+    font-size: 16px;
+}
+
+.title {
+    text-transform: uppercase;
+    font-size: 18px;
+    color: var(--color-dark-blue);
+}
+
+.subtitle {
+    font-size: 16px;
+    color: var(--color-dark-blue);
+}

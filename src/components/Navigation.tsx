@@ -1,9 +1,20 @@
 import React from 'react';
 import Styles from './Navigation.module.css';
+import NavigationButton from './NavigationButton';
 
-const Navigation = () => {
+export interface NavigationProps {
+    config: [{
+        title: string;
+        onClick: (id:number)=>void;
+    }],
+    active: number,
+}
+
+const Navigation = ({config, active}:NavigationProps) => {
     return (<div className={Styles.container}>
-        navigation placeholder
+        {config.map((btn, id) => (
+            <NavigationButton isActive={id === active} label={btn.title} onClick={()=>{btn.onClick(id)}} />
+        ))}
     </div>)
 }
 

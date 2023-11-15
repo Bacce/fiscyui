@@ -3,4 +3,6 @@
     border-bottom: 30px solid var(--color-dark-blue);
     background-color: var(--color-darker-green);
     padding: 35px 50px;
+    display: flex;
+    align-items: center;
 }
