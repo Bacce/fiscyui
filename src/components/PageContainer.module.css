@@ -11,6 +11,14 @@
     --color-dark-blue: #233b45;
 }
 
+:global(h1),
+:global(h2),
+:global(h3),
+:global(h4),
+:global(p){
+    color: var(--color-dark-blue);
+}
+
 .container {
     background-color: var(--color-background);
     position: relative;

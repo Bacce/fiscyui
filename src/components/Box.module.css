@@ -1,0 +1,13 @@
+.box {
+    border: 1px solid var(--color-dark-blue);
+    background-color: var(--color-light-green);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.boxInner {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}

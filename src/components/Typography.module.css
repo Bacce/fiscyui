@@ -16,3 +16,9 @@ span {
     font-size: 16px;
     color: var(--color-dark-blue);
 }
+
+.small {
+    font-size: 13px;
+    color: var(--color-dark-blue);
+    line-height: 1.3;
+}

@@ -1,34 +1,63 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import { Button, PageContainer, HeaderContainer, HeaderTitle, HeaderSubtitle, Footer, Navigation, NavigationButton, Typography, typoTypeEnum } from 'fissy-ui';
+import { 
+  PageContainer,
+  HeaderContainer,
+  HeaderTitle,
+  HeaderSubtitle,
+  Footer,
+  Navigation,
+  NavigationButton,
+  Typography,
+  typoTypeEnum,
+  Box,
+  BoxInner,
+  BoxTitle,
+  Spacer
+} from 'fissy-ui';
 
 const WelcomePage = () => {
   return (<div style={{textAlign:"center"}}>
     <h1>Welcome to the <b>Fiscy UI</b> documentation</h1>
-    <p>You can find all the available component on the sidebar, and we also have some example pages built for you.</p>
+    <p>You can find all the available component on the sidebar, and we also have some example pages built for you.<br/>
+    The designs are taken from here: <a href="https://interfaceingame.com/games/starfield/">https://interfaceingame.com/games/starfield/</a><br/>
+    Currently focusing on the Character Creation pages<br/>
+    If you are new here, you probably want to visit the examples first to see what this lib is capable of.</p>
   </div>)
 }
 
-const ColorPage = () => {
+const UsagePage = () => {
   const colors = [
-      {name: "background", hex: "#bdc7c3"},
-      {name: "darkBlue", hex: "#233b45"},
-      {name: "mediumBlue", hex: "#607376"},
-      {name: "lightBlue", hex: "#9daba9"},
-      {name: "lightGreen", hex: "#cad2cc"},
-      {name: "mediumGreen", hex: "#adbeb4"},
-      {name: "darkGreen", hex: "#a4b3a6"},
-      {name: "darkestGreen", hex: "#8a9894"},
+    {name: "background", hex: "#bdc7c3"},
+    {name: "darkBlue", hex: "#233b45"},
+    {name: "mediumBlue", hex: "#607376"},
+    {name: "lightBlue", hex: "#9daba9"},
+    {name: "lightGreen", hex: "#cad2cc"},
+    {name: "mediumGreen", hex: "#adbeb4"},
+    {name: "darkGreen", hex: "#a4b3a6"},
+    {name: "darkestGreen", hex: "#8a9894"},
   ]
 
   return (<>
-    <h1>Color palette</h1>
+  <h1>Usage</h1>
+  <p>This documentation uses Bootstrap 5 for css reset and layout, but the components themselves are not depend on Bootstrap in any way. But, there are some css related additions what makes bootstrap a good tool to use with the library, for example for keyboard navigation the highlight comes from bootstrap and it is working nicely.</p>
+  <p>General rule is to wrap every page into the PageContainer, as it is not just gives you the overlay and background color, but also provide the css variables all the other component relies on.</p>
 
-    {colors.map((color)=>(
-      <div style={{width: "100px", height: "100px", background: color.hex, border: "1px solid", margin: 10, display: "inline-block"}}>
-        <span style={{marginTop: "100%"}}>{color.name}</span>
-      </div>
-    ))}
+  <h2>Typography</h2>
+  <p>The font used in the game is not a free one, feel free to load your own font, I'm currently using bootstraps default font, eg. the system default Sans-Serif font.</p>
+  <p>This is not really figured out yet, I will add a custom font and investigate if any additional support is needed.</p>
+  <p>The designs use multiple fonts, so I'm also planning to go that way.</p>
+  <br />
+
+  <h2>Colors</h2>
+  <p>All the colors below have their corresponding css variable in the PageContainer component.</p>
+  <p>I don't have a good rule of thumb here, follow the designs, go crazy.</p>
+  <br />
+  {colors.map((color)=>(
+    <div style={{width: "100px", height: "100px", background: color.hex, border: "1px solid", margin: 10, display: "inline-block"}}>
+      <span style={{marginTop: "100%"}}>{color.name}</span>
+    </div>
+  ))}
   </>)
 }
 
@@ -52,7 +81,65 @@ const ExamplePage01 = () => {
       <HeaderSubtitle label="record locator"/>
       <Navigation config={navConfig} active={activeNav}/>
     </HeaderContainer>
-    <div style={{height: 380,}}></div>
+
+    <div className="container">
+      <div className="row">
+        <div className="col-4">
+          {/* LARGE IMAGE PLACEHOLDER */}
+        </div>
+
+        <div className="col-6">
+          <Spacer size={30} />
+          <h3>Beast Hunter</h3>
+          <p>From the Ashta of Akila to the Terrormorphs that plague the whole of the Settled Systems, hostile alien life abounds. You've learned the skills to track them, find them, and take them down.</p>
+          <Spacer size={30} />
+          <BoxTitle label="Starting skills" />
+          <Spacer size={5} />
+          <div className="row gx-2">
+            <div className="col-4">
+              <Box>
+                <img src="https://www.pngall.com/wp-content/uploads/8/Sample-PNG-Image.png" alt="" />
+                <BoxTitle label="Fitness" />
+                <BoxInner>
+                  <Typography type={typoTypeEnum.small}>Lorem ipsum dolor sit amet, orem ipsum sit amet</Typography>
+                  <Spacer size={10}/>
+                </BoxInner>
+              </Box>
+            </div>
+
+            <div className="col-4">
+              <Box>
+                <img src="https://www.pngall.com/wp-content/uploads/8/Sample-PNG-Image.png" alt="" />
+                <BoxTitle label="ballistics" />
+                <BoxInner>
+                  <Typography type={typoTypeEnum.small}>Lorem ipsum dolor sit amet, orem ipsum sit amet Lorem ipsum dolor sit amet</Typography>
+                  <Spacer size={10}/>
+                </BoxInner>
+              </Box>
+            </div>
+
+            <div className="col-4">
+              <Box>
+                <img src="https://www.pngall.com/wp-content/uploads/8/Sample-PNG-Image.png" alt="" />
+                <BoxTitle label="gastronomy" />
+                <BoxInner>
+                  <Typography type={typoTypeEnum.small}>Lorem ipsum dolor sit amet, orem ipsum sit amet Lorem ipsum dolor sit amet</Typography>
+                  <Spacer size={10}/>
+                </BoxInner>
+              </Box>
+            </div>
+          </div>
+          <Spacer size={30} />
+
+        </div>
+
+
+        <div className="col-2">
+          scrolling list
+        </div>
+      </div>
+    </div>
+
     <Footer>
       <Typography type={typoTypeEnum.title}>Employee number:&nbsp;</Typography>
       <Typography>12321-12341234-12341234</Typography>
@@ -72,10 +159,19 @@ const App = () => {
     },
     {
       type: "page",
-      title: "Colors",
-      name: "colorspage",
-      component: ColorPage
+      title: "Usage",
+      name: "usagepage",
+      component: UsagePage
     },
+    {
+      type: "example",
+      title: "Example page",
+      name: "page1",
+      description: "",
+      component: ExamplePage01
+    },
+
+
     {
       type: "comp",
       title: "PageContainer",
@@ -246,35 +342,82 @@ const App = () => {
     },
     {
       type: "comp",
-      title: "Button1",
-      name: "button1",
-      description: "Button for some glorious purpose",
-      component: Button,
-      exampleCode: "<Button label='testButton' onClick={()=>{alert('Click')} }/>",
+      title: "Box",
+      name: "box",
+      description: "Container element with border. It is designed to be used with the BoxInner component, where the title is outside.",
+      component: Box,
+      exampleCode: "<Box><BoxTitle label='title'/><BoxInner>content</BoxInner></Box>",
       exampleProps: {
-        label: "example button",
-        onClick: ()=>{alert("Click")}
+        children: "content"
+      },
+      props: [
+        {
+          name: "children",
+          type: "string",
+          desc: "content of the box"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "BoxTitle",
+      name: "boxtitle",
+      description: "A very obvious title inside a box",
+      component: BoxTitle,
+      exampleCode: "<BoxTitle label='title'/>",
+      exampleProps: {
+        label: "content"
       },
       props: [
         {
           name: "label",
           type: "string",
-          desc: "button label"
-        },
-        {
-          name: "onClick",
-          type: "function",
-          desc: "on click event handler function"
+          desc: "content of the boxTitle"
         }
       ]
     },
     {
-      type: "example",
-      title: "Example page",
-      name: "page1",
-      description: "Example page",
-      component: ExamplePage01
-    }
+      type: "comp",
+      title: "Spacer",
+      name: "spacer",
+      description: "The components shouldn't take care of their own positioning, and instead of writing inline styles, you should use the Spacer component where non-standard spacing required.",
+      component: BoxTitle,
+      exampleCode: "<Spacer size={5}/>",
+      exampleProps: {
+        size: 5
+      },
+      props: [
+        {
+          name: "size",
+          type: "number",
+          desc: "Size of the spacer component"
+        }
+      ]
+    },
+    // {
+    //   type: "comp",
+    //   title: "Button1",
+    //   name: "button1",
+    //   description: "Button for some glorious purpose",
+    //   component: Button,
+    //   exampleCode: "<Button label='testButton' onClick={()=>{alert('Click')} }/>",
+    //   exampleProps: {
+    //     label: "example button",
+    //     onClick: ()=>{alert("Click")}
+    //   },
+    //   props: [
+    //     {
+    //       name: "label",
+    //       type: "string",
+    //       desc: "button label"
+    //     },
+    //     {
+    //       name: "onClick",
+    //       type: "function",
+    //       desc: "on click event handler function"
+    //     }
+    //   ]
+    // },
   ]
 
   const handleOpenDoc = (docName) => {
@@ -292,23 +435,24 @@ const App = () => {
       <div className="container-fluid">
           
           {/* LEFT SIDEBAR */}
-          <div className="row" style={{minHeight: "calc(100vh - 50px)",}}>
+          <div className="row" style={{height: "calc(100vh - 50px)", overflow: "hidden",}}>
             <div className="col" style={{flexBasis: 150, flexGrow: 0, overflow:"hidden", borderRight: "2px solid #718093", }}>
 
               {/* INFO */}
+              <h5>Info</h5>
               {docs.filter((item)=>item.type === "page").map((item, id)=>(<button key={`page${id}`} type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
+              {/* EXAMPLES */}
+              <h5>Examples</h5>
+              {docs.filter((item)=>item.type === "example").map((item, id)=>(<button key={`example${id}`} type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
               {/* COMPONENTS */}
               <h5 style={{marginTop: 10}}>Components</h5>
               {docs.filter((item)=>item.type === "comp").map((item, id)=>(<button key={`component${id}`} type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
               
-              {/* EXAMPLES */}
-              <h5>Examples</h5>
-              {docs.filter((item)=>item.type === "example").map((item, id)=>(<button key={`example${id}`} type="button" className="btn btn-link btn-sm" onClick={()=>{handleOpenDoc(item.name)}}>{item.title}</button>))}
             </div>
 
 
             {/* PREVIEW */}
-            <div className="col">
+            <div className="col" style={{overflow: "auto", height: "100%",}}>
               {active && (<>
                 {active.type !== "page" && <h1>{active.title}</h1>}
                 <p>{active.description}</p>

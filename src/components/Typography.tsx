@@ -4,6 +4,7 @@ import Styles from './Typography.module.css';
 export enum typoTypeEnum {
     title = "title",
     subtitle = "subtitle",
+    small = "small",
     default = "default",
 }
 

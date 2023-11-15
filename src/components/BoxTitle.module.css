@@ -1,0 +1,8 @@
+.container {
+    background-color: var(--color-dark-blue);
+    color: #fff;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 1px 7px;
+    line-height: 1.3;
+}
