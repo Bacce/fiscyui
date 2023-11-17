@@ -13,12 +13,15 @@ import {
   Box,
   BoxInner,
   BoxTitle,
-  Spacer
+  Spacer,
+  Table,
+  ScrollingContainer,
+  RadioButton,
 } from 'fissy-ui';
 
 const WelcomePage = () => {
   return (<div style={{textAlign:"center"}}>
-    <h1>Welcome to the <b>Fiscy UI</b> documentation</h1>
+    <h1>Welcome to the <b>Fiscy UI</b></h1>
     <p>You can find all the available component on the sidebar, and we also have some example pages built for you.<br/>
     The designs are taken from here: <a href="https://interfaceingame.com/games/starfield/">https://interfaceingame.com/games/starfield/</a><br/>
     Currently focusing on the Character Creation pages<br/>
@@ -83,9 +86,30 @@ const ExamplePage01 = () => {
     </HeaderContainer>
 
     <div className="container">
-      <div className="row">
+      <div className="row" style={{padding: "10px 0"}}>
         <div className="col-4">
-          {/* LARGE IMAGE PLACEHOLDER */}
+          <BoxTitle label="Traits: 3/3" />
+          <Table>
+            <tr>
+              <td>
+                <img src="https://www.pngall.com/wp-content/uploads/8/Sample-PNG-Image.png" alt=""  width="120"/>
+                <span>Hero Worshipped</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="https://www.pngall.com/wp-content/uploads/8/Sample-PNG-Image.png" alt=""  width="120"/>
+                <span>Spaced</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="https://www.pngall.com/wp-content/uploads/8/Sample-PNG-Image.png" alt=""  width="120"/>
+                <span>Taskmaster</span>
+              </td>
+            </tr>
+          </Table>
+          <Spacer size={30} />
         </div>
 
         <div className="col-6">
@@ -130,12 +154,15 @@ const ExamplePage01 = () => {
             </div>
           </div>
           <Spacer size={30} />
-
         </div>
 
 
         <div className="col-2">
-          scrolling list
+          <ScrollingContainer>
+            {['Beast Hunter', 'Bouncer', 'Bounty Hunter', 'Chef', 'Combat Medic', 'Cyber Runner', 'Cybernetics', 'Diplomat', 'Explorer', 'Gangster', 'Homesteader', 'Industrialist', 'Long Hauler', 'Pilgrim', 'Professor', 'Ronin'].map((label)=>(
+              <RadioButton label={label} onClick={()=>{console.log(label)}}/>
+            ))}
+          </ScrollingContainer>
         </div>
       </div>
     </div>
@@ -394,30 +421,66 @@ const App = () => {
         }
       ]
     },
-    // {
-    //   type: "comp",
-    //   title: "Button1",
-    //   name: "button1",
-    //   description: "Button for some glorious purpose",
-    //   component: Button,
-    //   exampleCode: "<Button label='testButton' onClick={()=>{alert('Click')} }/>",
-    //   exampleProps: {
-    //     label: "example button",
-    //     onClick: ()=>{alert("Click")}
-    //   },
-    //   props: [
-    //     {
-    //       name: "label",
-    //       type: "string",
-    //       desc: "button label"
-    //     },
-    //     {
-    //       name: "onClick",
-    //       type: "function",
-    //       desc: "on click event handler function"
-    //     }
-    //   ]
-    // },
+    {
+      type: "comp",
+      title: "Table",
+      name: "table",
+      description: "Behave as a regular <table> DOM element, it contain some basic styling, so it should receive children as table elements",
+      component: Table,
+      exampleCode: "<Table><tr><td>table content</td></tr></Table>",
+      exampleProps: {
+        children: (<tr><td>Table content</td></tr>)
+      },
+      props: [
+        {
+          name: "children",
+          type: "function",
+          desc: "JSX content for the table"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "ScrollingContainer",
+      name: "scrollCont",
+      description: "This container element will take the parent components height as available vertical height, so the parent should be empty. And it will fill it instead of pushing the page to accomodate for it's content.",
+      component: ScrollingContainer,
+      exampleCode: "<ScrollingContainer>content of any kind</ScrollingContainer>",
+      exampleProps: {
+        children: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis, obcaecati. Incidunt enim, at vel eum dignissimos cum numquam porro magni amet quia nisi optio veniam nobis similique fugit aliquam pariatur."
+      },
+      props: [
+        {
+          name: "children",
+          type: "string",
+          desc: "JSX content of any kind"
+        }
+      ]
+    },
+    {
+      type: "comp",
+      title: "RadioButton",
+      name: "radio",
+      description: "Toggleable two-state button",
+      component: RadioButton,
+      exampleCode: "<RadioButton label='testButton' onClick={()=>{}}/>",
+      exampleProps: {
+        label: "Example button",
+        onClick:()=>{alert('clicked')}
+      },
+      props: [
+        {
+          name: "label",
+          type: "string",
+          desc: "Label of the radio button"
+        },
+        {
+          name: "onClick",
+          type: "function",
+          desc: "onClick callback"
+        },
+      ]
+    },
   ]
 
   const handleOpenDoc = (docName) => {

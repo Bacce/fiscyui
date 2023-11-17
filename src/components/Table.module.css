@@ -1,0 +1,11 @@
+.table {
+    width: 100%;
+}
+
+.table tr {
+    border: 1px solid var(--color-dark-blue);
+}
+
+.table td {
+    padding: 7px;
+}

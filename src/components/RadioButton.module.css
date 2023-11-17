@@ -1,0 +1,17 @@
+.container {
+    position: relative;
+    padding: 8px 0 8px 34px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.container:hover {
+    background-color: var(--color-light-green);
+}
+
+.container.checked::before {
+    content: "✔️";
+    position: absolute;
+    left: 0;
+    padding-left: 5px;
+}

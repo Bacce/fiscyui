@@ -10,3 +10,6 @@ export { default as Typography, typoTypeEnum} from "./components/Typography";
 export { default as Box, BoxInner } from "./components/Box";
 export { default as BoxTitle } from "./components/BoxTitle";
 export { default as Spacer } from "./components/Spacer";
+export { default as Table } from "./components/Table";
+export { default as ScrollingContainer } from "./components/ScrollingContainer";
+export { default as RadioButton } from "./components/RadioButton";
